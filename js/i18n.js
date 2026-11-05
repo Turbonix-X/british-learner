@@ -1,0 +1,155 @@
+/* British Learner: English and French interface text. */
+window.BL = window.BL || {};
+
+(function () {
+  const KEY = "bl-lang";
+  const STRINGS = {
+    rights: { en: "All rights reserved.", fr: "Tous droits réservés." },
+    heroLine1: { en: "Your iGCSEs,", fr: "Tes iGCSE," },
+    heroLine2: { en: "one lesson at a time.", fr: "une leçon à la fois." },
+    heroSub: { en: "Every Maths, Physics, Chemistry, Biology and Computer Science programme, with Cambridge, Edexcel and AQA. The lessons are on their way, and the periodic table is ready now.", fr: "Tous les programmes de maths, physique, chimie, biologie et informatique, avec Cambridge, Edexcel et AQA. Les leçons arrivent bientôt, et le tableau périodique est déjà prêt." },
+    statSubjects: { en: "subjects", fr: "matières" },
+    statBoards: { en: "exam boards", fr: "boards" },
+    statLessons: { en: "lessons planned", fr: "leçons prévues" },
+    statElements: { en: "elements to explore", fr: "éléments à explorer" },
+    chooseBoardCard: { en: "Choose your board →", fr: "Choisis ton board →" },
+    board: { en: "Board", fr: "Board" },
+    level: { en: "Level", fr: "Niveau" },
+    soon: { en: "Coming soon", fr: "Bientôt" },
+    chooseBoard: { en: "Choose your exam board", fr: "Choisis ton board d'examen" },
+    specification: { en: "Specification", fr: "Spécification" },
+    units: { en: "units", fr: "unités" },
+    lessons: { en: "lessons", fr: "leçons" },
+    lesson: { en: "lesson", fr: "leçon" },
+    openAll: { en: "Open all units", fr: "Ouvrir toutes les unités" },
+    closeAll: { en: "Close all units", fr: "Fermer toutes les unités" },
+    allSoon: { en: "All lessons are coming soon", fr: "Toutes les leçons arrivent bientôt" },
+    aqaNote: { en: "AQA's International GCSEs are run by OxfordAQA, so this is the OxfordAQA programme.", fr: "Les International GCSE d'AQA sont proposés par OxfordAQA : voici donc le programme OxfordAQA." },
+    officialNote: { en: "Unit and lesson names follow the official specification. Check the current version with your school.", fr: "Les noms des unités et des leçons suivent la spécification officielle, en anglais à l'origine. Vérifie la version en vigueur auprès de ton école." },
+    soonTitle: { en: "This lesson is coming soon", fr: "Cette leçon arrive bientôt" },
+    soonText: { en: "Bob is still working on it. In the meantime, you can look through the rest of the programme.", fr: "Bob y travaille encore. En attendant, tu peux parcourir le reste du programme." },
+    prevLesson: { en: "Previous lesson", fr: "Leçon précédente" },
+    nextLesson: { en: "Next lesson", fr: "Leçon suivante" },
+    backUnits: { en: "All units", fr: "Toutes les unités" },
+    ptCtaTitle: { en: "Interactive periodic table", fr: "Tableau périodique interactif" },
+    ptCtaText: { en: "Explore all 118 elements, their isotopes, atoms and best-known molecules.", fr: "Explore les 118 éléments, leurs isotopes, leurs atomes et leurs molécules les plus connues." },
+    notFound: { en: "Page not found", fr: "Page introuvable" },
+    notFoundText: { en: "That page doesn't exist.", fr: "Cette page n'existe pas." },
+    home: { en: "Back to home", fr: "Retour à l'accueil" },
+    loadError: { en: "That didn't load", fr: "Le chargement a échoué" },
+    loadErrorText: { en: "Check your connection and reload the page.", fr: "Vérifie ta connexion et recharge la page." },
+    loading: { en: "Loading the elements…", fr: "Chargement des éléments…" },
+
+    chemistry: { en: "Chemistry", fr: "Chimie" },
+    ptIntro: { en: "Click any element to see its atom, isotopes, molecules and properties. Click a group or period number to highlight it.", fr: "Clique sur un élément pour voir son atome, ses isotopes, ses molécules et ses propriétés. Clique sur le numéro d'un groupe ou d'une période pour le mettre en valeur." },
+    search: { en: "Search elements", fr: "Chercher un élément" },
+    noMatch: { en: "No element matches that search.", fr: "Aucun élément ne correspond à cette recherche." },
+    mCategory: { en: "Category", fr: "Catégorie" },
+    mState: { en: "State at 20 °C", fr: "État à 20 °C" },
+    mBlock: { en: "Block", fr: "Bloc" },
+    mEn: { en: "Electronegativity", fr: "Électronégativité" },
+    mRadius: { en: "Atomic radius", fr: "Rayon atomique" },
+    mIe: { en: "Ionisation energy", fr: "Énergie d'ionisation" },
+    low: { en: "Low", fr: "Bas" },
+    high: { en: "High", fr: "Élevé" },
+    pauling: { en: "Pauling scale", fr: "échelle de Pauling" },
+    solid: { en: "Solid", fr: "Solide" },
+    liquid: { en: "Liquid", fr: "Liquide" },
+    gas: { en: "Gas", fr: "Gaz" },
+    unknown: { en: "Unknown", fr: "Inconnu" },
+    unknownState: { en: "Unknown (too short-lived to measure)", fr: "Inconnu (durée de vie trop courte pour le mesurer)" },
+    period: { en: "Period", fr: "Période" },
+    group: { en: "Group", fr: "Groupe" },
+    highlightGroup: { en: "Highlight group", fr: "Mettre en valeur le groupe" },
+    highlightPeriod: { en: "Highlight period", fr: "Mettre en valeur la période" },
+    whatMeans: { en: "What it all means", fr: "Ce que tout cela veut dire" },
+    wordsMean: { en: "What the words mean", fr: "Ce que veulent dire les mots" },
+    sources: { en: "Sources", fr: "Sources" },
+    sourceText: { en: "Values for very heavy elements are often predictions. Summaries from Wikipedia, CC BY-SA.", fr: "Les valeurs des éléments très lourds sont souvent des prédictions. Résumés issus de Wikipédia, CC BY-SA." },
+    backPt: { en: "Periodic table", fr: "Tableau périodique" },
+    usedFor: { en: "Used for:", fr: "Sert à :" },
+    insideAtom: { en: "Inside the atom", fr: "Dans l'atome" },
+    atomHelp: { en: "Click a proton, neutron, electron or shell. This 2D model is simplified and not to scale.", fr: "Clique sur un proton, un neutron, un électron ou une couche. Ce modèle 2D est simplifié et n'est pas à l'échelle." },
+    proton: { en: "Proton", fr: "Proton" },
+    neutron: { en: "Neutron", fr: "Neutron" },
+    electron: { en: "Electron", fr: "Électron" },
+    isotope: { en: "Isotope", fr: "Isotope" },
+    ionCharge: { en: "Ion charge", fr: "Charge de l'ion" },
+    addElectron: { en: "Add an electron", fr: "Ajouter un électron" },
+    removeElectron: { en: "Remove an electron", fr: "Retirer un électron" },
+    pause: { en: "Pause", fr: "Pause" },
+    play: { en: "Play", fr: "Lecture" },
+    properties: { en: "Properties", fr: "Propriétés" },
+    electronsPerShell: { en: "Electrons per shell", fr: "Électrons par couche" },
+    shell: { en: "Shell", fr: "Couche" },
+    appearance: { en: "Appearance", fr: "Apparence" },
+    noAppearance: { en: "Unknown, as too little has been made to observe it.", fr: "Inconnue, car on en a produit trop peu pour l'observer." },
+    readMore: { en: "Read more on Wikipedia", fr: "En savoir plus sur Wikipédia" },
+    readingEl: { en: "Reading this element", fr: "Comprendre cet élément" },
+    isotopes: { en: "Isotopes", fr: "Isotopes" },
+    isoHelp: { en: "Shows the stable and naturally occurring isotopes, plus the longest-lived radioactive ones. Click a row to see it in the atom above.", fr: "Montre les isotopes stables et naturels, puis les radioactifs qui durent le plus longtemps. Clique sur une ligne pour le voir dans l'atome." },
+    protons: { en: "Protons", fr: "Protons" },
+    neutrons: { en: "Neutrons", fr: "Neutrons" },
+    atomicMass: { en: "Atomic mass", fr: "Masse atomique" },
+    abundance: { en: "Natural abundance", fr: "Abondance naturelle" },
+    stability: { en: "Stability", fr: "Stabilité" },
+    trace: { en: "None or trace", fr: "Aucune ou traces" },
+    stable: { en: "Stable", fr: "Stable" },
+    halfLife: { en: "Half-life", fr: "Demi-vie" },
+    molecules: { en: "Well-known molecules and compounds", fr: "Molécules et composés connus" },
+    atomicNumber: { en: "Atomic number", fr: "Numéro atomique" },
+    relMass: { en: "Relative atomic mass", fr: "Masse atomique relative" },
+    block: { en: "Block", fr: "Bloc" },
+    stateAt: { en: "State at 20 °C", fr: "État à 20 °C" },
+    melting: { en: "Melting point", fr: "Point de fusion" },
+    boiling: { en: "Boiling point", fr: "Point d'ébullition" },
+    density: { en: "Density", fr: "Masse volumique" },
+    electronegativity: { en: "Electronegativity", fr: "Électronégativité" },
+    firstIon: { en: "First ionisation energy", fr: "Première énergie d'ionisation" },
+    affinity: { en: "Electron affinity", fr: "Affinité électronique" },
+    radius: { en: "Atomic radius", fr: "Rayon atomique" },
+    oxidation: { en: "Common oxidation states", fr: "États d'oxydation courants" },
+    molarHeat: { en: "Molar heat capacity", fr: "Capacité thermique molaire" },
+    discovered: { en: "Discovered by", fr: "Découvert par" },
+    year: { en: "Year discovered", fr: "Année de découverte" },
+    named: { en: "Named by", fr: "Nommé par" },
+    notRecorded: { en: "Not recorded", fr: "Non renseigné" },
+    exploreTitle: { en: "Explore the atom", fr: "Explore l'atome" },
+    exploreText: { en: "Click any particle or shell in the model to learn about it.", fr: "Clique sur une particule ou une couche du modèle pour en savoir plus." },
+    posIon: { en: "Positive ion", fr: "Ion positif" },
+    negIon: { en: "Negative ion", fr: "Ion négatif" },
+    posIonText: { en: "Removing an electron leaves more protons than electrons, so the overall charge becomes positive. Not every ion shown here exists in real chemistry.", fr: "Retirer un électron laisse plus de protons que d'électrons : la charge totale devient positive. Tous les ions montrés ici n'existent pas forcément en chimie." },
+    negIonText: { en: "Adding an electron gives more electrons than protons, so the overall charge becomes negative. Not every ion shown here exists in real chemistry.", fr: "Ajouter un électron donne plus d'électrons que de protons : la charge totale devient négative. Tous les ions montrés ici n'existent pas forcément en chimie." },
+    maxRemoved: { en: "That's as many electrons as this model removes.", fr: "Ce modèle ne retire pas plus d'électrons." },
+    maxAdded: { en: "That's as many electrons as this model adds.", fr: "Ce modèle n'ajoute pas plus d'électrons." },
+    neutralAtom: { en: "neutral atom", fr: "atome neutre" },
+    positiveIon: { en: "positive ion", fr: "ion positif" },
+    negativeIon: { en: "negative ion", fr: "ion négatif" },
+    protonsLower: { en: "protons", fr: "protons" },
+    neutronsLower: { en: "neutrons", fr: "neutrons" },
+    electronsLower: { en: "electrons", fr: "électrons" },
+    noCompounds: { en: "Only tiny amounts have ever been made, so it has no well-known compounds.", fr: "On n'en a jamais produit que d'infimes quantités : il n'a donc pas de composés connus." },
+    research: { en: "Research only", fr: "Recherche uniquement" },
+  };
+
+  function initial() {
+    let saved = null;
+    try { saved = localStorage.getItem(KEY); } catch (e) { /* storage unavailable */ }
+    if (saved === "en" || saved === "fr") return saved;
+    return (navigator.language || "en").toLowerCase().indexOf("fr") === 0 ? "fr" : "en";
+  }
+
+  BL.lang = initial();
+  document.documentElement.lang = BL.lang;
+
+  BL.t = function (key) { return STRINGS[key] ? STRINGS[key][BL.lang] : key; };
+  // Reads the current language from any { en, fr } object.
+  BL.pick = function (obj) { return obj[BL.lang]; };
+  BL.setLang = function (lang) {
+    if (lang === BL.lang) return;
+    BL.lang = lang;
+    document.documentElement.lang = lang;
+    try { localStorage.setItem(KEY, lang); } catch (e) { /* storage unavailable */ }
+    document.dispatchEvent(new CustomEvent("bl-lang"));
+  };
+})();
