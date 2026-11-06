@@ -33,7 +33,7 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
     characteristicsIntro: "Each characteristic below is laid out the same way: what it means, why it matters, then an example in animals and one in plants.",
     characteristics: [
       {
-        id: "movement", icon: "movement", title: "They move",
+        id: "movement", icon: "movement", title: "Movement", description: "They move",
         what: "Organisms can move all or part of their body.",
         why: "Movement helps organisms reach food, light and mates, or get away from danger.",
         animals: "Most animals can move their whole body from place to place, usually using muscles.",
@@ -42,7 +42,7 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
         remember: "An organism doesn't have to travel to show movement. Moving one part of its body is enough.",
       },
       {
-        id: "respiration", icon: "respiration", title: "They respire",
+        id: "respiration", icon: "respiration", title: "Respiration", description: "They respire",
         what: "Cells carry out chemical reactions that release energy from food molecules such as glucose.",
         why: "Every process in a living cell needs energy, so respiration has to continue all the time.",
         animals: "Animals use this energy for muscle contraction, building large molecules and, in mammals and birds, keeping a constant body temperature.",
@@ -52,7 +52,7 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
         trap: "Respiration isn't the same as breathing. Breathing moves air in and out of the lungs. Respiration is a chemical reaction that happens inside cells.",
       },
       {
-        id: "response", icon: "response", title: "They respond to their surroundings",
+        id: "response", icon: "response", title: "Sensitivity", description: "They respond to their surroundings",
         what: "Organisms detect changes in their surroundings, called stimuli, and react to them.",
         why: "Responding helps organisms find what they need and avoid danger, which improves their chances of survival.",
         animals: "Animals usually respond quickly using their senses, nerves and muscles. For example, you pull your hand away from a hot object.",
@@ -61,7 +61,7 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
         remember: "Plants respond too. Their responses are just usually slower and harder to see.",
       },
       {
-        id: "control", icon: "control", title: "They control their internal conditions",
+        id: "control", icon: "control", title: "Control", description: "They control their internal conditions",
         what: "Organisms keep the conditions inside them within a suitable range. This is called homeostasis.",
         why: "Enzymes and cells only work properly in the right conditions, so large changes could stop vital reactions.",
         animals: "Humans keep their body temperature close to 37 °C. They also control their blood glucose and water content.",
@@ -70,7 +70,7 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
         remember: "The conditions outside can change a lot, while the conditions inside stay fairly stable.",
       },
       {
-        id: "growth", icon: "growth", title: "They grow and develop",
+        id: "growth", icon: "growth", title: "Growth", description: "They grow and develop",
         what: "Organisms permanently increase in size or mass, and become more complex as they mature.",
         why: "Growth and development take an organism from its simplest form to a mature adult that can reproduce.",
         animals: "A human starts as a single fertilised egg cell, which divides again and again to form an embryo, a baby and then an adult.",
@@ -79,7 +79,7 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
         remember: "Growth is about getting bigger. Development is about becoming more complex. Scientists often compare dry mass, because water content can change from day to day.",
       },
       {
-        id: "reproduction", icon: "reproduction", title: "They reproduce",
+        id: "reproduction", icon: "reproduction", title: "Reproduction", description: "They reproduce",
         what: "Organisms produce new individuals of the same kind, called offspring.",
         why: "Individuals eventually die, so a species would disappear without reproduction.",
         animals: "Most animals reproduce sexually. A male and a female gamete join in fertilisation, and the offspring vary.",
@@ -88,7 +88,7 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
         remember: "Sexual reproduction produces offspring that vary. Asexual reproduction produces offspring that are genetically identical to the parent.",
       },
       {
-        id: "excretion", icon: "excretion", title: "They excrete their waste",
+        id: "excretion", icon: "excretion", title: "Excretion", description: "They excrete their waste",
         what: "Organisms remove the waste products made by their own chemical reactions.",
         why: "These waste products can be harmful if they build up in the body.",
         animals: "Humans excrete carbon dioxide through the lungs, and urea and excess water through the kidneys as urine.",
@@ -98,7 +98,7 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
         trap: "Faeces aren't an example of excretion. They're mostly undigested food that never entered the body's cells, and removing them is called egestion.",
       },
       {
-        id: "nutrition", icon: "nutrition", title: "They require nutrition",
+        id: "nutrition", icon: "nutrition", title: "Nutrition", description: "They require nutrition",
         what: "Organisms need to take in or make nutrients.",
         why: "Nutrients provide the energy that keeps cells working, and the materials needed for growth and repair.",
         animals: "Animals eat other organisms or their products. They then digest the food and absorb the nutrients.",
@@ -113,9 +113,9 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
       table: [
         ["Movement", "They can move all or part of their body."],
         ["Respiration", "Their cells release energy from food molecules."],
-        ["Response", "They detect changes around them and react."],
+        ["Sensitivity", "They detect changes around them and react."],
         ["Control", "They keep their internal conditions stable."],
-        ["Growth and development", "They get bigger and more complex."],
+        ["Growth", "They get bigger and more complex."],
         ["Reproduction", "They produce offspring."],
         ["Excretion", "They remove waste made by their own reactions."],
         ["Nutrition", "They take in or make nutrients."],
@@ -157,7 +157,7 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
     characteristicsIntro: "Chaque caractéristique est présentée de la même façon : ce qu'elle veut dire, pourquoi elle est importante, puis un exemple chez les animaux et un autre chez les plantes.",
     characteristics: [
       {
-        id: "movement", icon: "movement", title: "Ils bougent", en: "They move",
+        id: "movement", icon: "movement", title: "Movement", description: "Ils bougent",
         what: "Les organismes peuvent déplacer tout leur corps ou une partie de celui-ci.",
         why: "Le mouvement aide les organismes à atteindre la nourriture, la lumière et des partenaires, ou à fuir le danger.",
         animals: "La plupart des animaux peuvent déplacer tout leur corps d'un endroit à un autre, en général grâce à leurs muscles.",
@@ -166,7 +166,7 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
         remember: "Un organisme n'a pas besoin de se déplacer pour montrer du mouvement. Bouger une partie de son corps suffit.",
       },
       {
-        id: "respiration", icon: "respiration", title: "Ils respirent", en: "They respire",
+        id: "respiration", icon: "respiration", title: "Respiration", description: "Ils respirent",
         what: "Les cellules réalisent des réactions chimiques qui libèrent l'énergie de molécules alimentaires comme le glucose.",
         why: "Tous les processus d'une cellule vivante ont besoin d'énergie : la respiration doit donc se poursuivre en permanence.",
         animals: "Les animaux utilisent cette énergie pour contracter leurs muscles, fabriquer de grosses molécules et, chez les mammifères et les oiseaux, garder une température corporelle constante.",
@@ -176,7 +176,7 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
         trap: "Respirer au sens biologique, ce n'est pas la même chose que ventiler. La ventilation fait entrer et sortir l'air des poumons. La respiration est une réaction chimique qui a lieu dans les cellules.",
       },
       {
-        id: "response", icon: "response", title: "Ils réagissent à leur environnement", en: "They respond to their surroundings",
+        id: "response", icon: "response", title: "Sensitivity", description: "Ils réagissent à leur environnement",
         what: "Les organismes détectent les changements de leur environnement, appelés stimuli, et y réagissent.",
         why: "Réagir aide les organismes à trouver ce dont ils ont besoin et à éviter le danger, ce qui augmente leurs chances de survie.",
         animals: "Les animaux réagissent en général vite, grâce à leurs sens, leurs nerfs et leurs muscles. Par exemple, tu retires ta main d'un objet brûlant.",
@@ -185,7 +185,7 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
         remember: "Les plantes réagissent aussi. Leurs réponses sont simplement, en général, plus lentes et moins visibles.",
       },
       {
-        id: "control", icon: "control", title: "Ils contrôlent leur milieu intérieur", en: "They control their internal conditions",
+        id: "control", icon: "control", title: "Control", description: "Ils contrôlent leur milieu intérieur",
         what: "Les organismes maintiennent leurs conditions internes dans des limites adaptées. C'est ce qu'on appelle l'homéostasie.",
         why: "Les enzymes et les cellules ne fonctionnent bien que dans de bonnes conditions : de grands changements pourraient arrêter des réactions vitales.",
         animals: "Les humains gardent leur température corporelle proche de 37 °C. Ils contrôlent aussi leur glycémie et leur teneur en eau.",
@@ -194,7 +194,7 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
         remember: "Les conditions extérieures peuvent beaucoup changer, alors que les conditions intérieures restent assez stables.",
       },
       {
-        id: "growth", icon: "growth", title: "Ils grandissent et se développent", en: "They grow and develop",
+        id: "growth", icon: "growth", title: "Growth", description: "Ils grandissent et se développent",
         what: "Les organismes augmentent durablement de taille ou de masse, et deviennent plus complexes en mûrissant.",
         why: "La croissance et le développement mènent un organisme de sa forme la plus simple à un adulte capable de se reproduire.",
         animals: "Un humain commence sous la forme d'un seul œuf fécondé, qui se divise encore et encore pour former un embryon, un bébé, puis un adulte.",
@@ -203,7 +203,7 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
         remember: "La croissance, c'est devenir plus grand. Le développement, c'est devenir plus complexe. Les scientifiques comparent souvent la masse sèche, car la quantité d'eau peut varier d'un jour à l'autre.",
       },
       {
-        id: "reproduction", icon: "reproduction", title: "Ils se reproduisent", en: "They reproduce",
+        id: "reproduction", icon: "reproduction", title: "Reproduction", description: "Ils se reproduisent",
         what: "Les organismes produisent de nouveaux individus de la même espèce, appelés descendants.",
         why: "Les individus finissent par mourir : sans reproduction, une espèce disparaîtrait.",
         animals: "La plupart des animaux se reproduisent de façon sexuée. Un gamète mâle et un gamète femelle s'unissent lors de la fécondation, et les descendants sont variés.",
@@ -212,7 +212,7 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
         remember: "La reproduction sexuée donne des descendants variés. La reproduction asexuée donne des descendants génétiquement identiques au parent.",
       },
       {
-        id: "excretion", icon: "excretion", title: "Ils excrètent leurs déchets", en: "They excrete their waste",
+        id: "excretion", icon: "excretion", title: "Excretion", description: "Ils excrètent leurs déchets",
         what: "Les organismes éliminent les déchets produits par leurs propres réactions chimiques.",
         why: "Ces déchets peuvent être nocifs s'ils s'accumulent dans le corps.",
         animals: "Les humains excrètent le dioxyde de carbone par les poumons, et l'urée et l'excès d'eau par les reins, dans l'urine.",
@@ -222,7 +222,7 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
         trap: "Les selles ne sont pas un exemple d'excrétion. Elles contiennent surtout des aliments non digérés qui ne sont jamais entrés dans les cellules du corps, et leur élimination s'appelle l'égestion.",
       },
       {
-        id: "nutrition", icon: "nutrition", title: "Ils ont besoin de se nourrir", en: "They require nutrition",
+        id: "nutrition", icon: "nutrition", title: "Nutrition", description: "Ils ont besoin de se nourrir",
         what: "Les organismes doivent absorber ou fabriquer des nutriments.",
         why: "Les nutriments fournissent l'énergie qui fait fonctionner les cellules, et les matériaux nécessaires à la croissance et à la réparation.",
         animals: "Les animaux mangent d'autres organismes ou ce qu'ils produisent. Ils digèrent ensuite les aliments et absorbent les nutriments.",
@@ -235,13 +235,13 @@ BL.addLesson("biology/edexcel/igcse/characteristics-of-living-organisms", {
       lead: "Tous les êtres vivants, des bactéries aux baleines bleues, réalisent les mêmes huit processus, même s'ils le font de façons différentes.",
       tableHead: ["Caractéristique", "En une phrase"],
       table: [
-        ["Mouvement", "Ils peuvent bouger tout leur corps ou une partie de celui-ci."],
+        ["Movement", "Ils peuvent bouger tout leur corps ou une partie de celui-ci."],
         ["Respiration", "Leurs cellules libèrent l'énergie des molécules alimentaires."],
-        ["Réponse", "Ils détectent les changements autour d'eux et y réagissent."],
-        ["Contrôle", "Ils gardent leurs conditions internes stables."],
-        ["Croissance et développement", "Ils deviennent plus grands et plus complexes."],
+        ["Sensitivity", "Ils détectent les changements autour d'eux et y réagissent."],
+        ["Control", "Ils gardent leurs conditions internes stables."],
+        ["Growth", "Ils deviennent plus grands et plus complexes."],
         ["Reproduction", "Ils produisent des descendants."],
-        ["Excrétion", "Ils éliminent les déchets de leurs propres réactions."],
+        ["Excretion", "Ils éliminent les déchets de leurs propres réactions."],
         ["Nutrition", "Ils absorbent ou fabriquent des nutriments."],
       ],
       mnemonicTitle: "Une astuce pour les retenir",

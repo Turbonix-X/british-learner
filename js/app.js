@@ -319,7 +319,7 @@
         return;
       }
       view.innerHTML = '<div class="loading">' + t("loading") + "</div>";
-      Promise.all([loadScript("js/data/elements.js?v=6"), loadScript("js/data/compounds.js?v=6"), loadScript("js/data/compounds-fr.js?v=6")]).then(function () {
+      Promise.all([loadScript("js/data/elements.js?v=7"), loadScript("js/data/compounds.js?v=7"), loadScript("js/data/compounds-fr.js?v=7")]).then(function () {
         if (token === routeToken) BL.transition(function () { renderRoute(); });
       }).catch(function () {
         setView('<section class="card soon-card"><h1 class="page-title">' + t("loadError") + "</h1><p>" + t("loadErrorText") + "</p></section>");

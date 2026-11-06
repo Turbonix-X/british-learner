@@ -4,7 +4,7 @@ window.BL = window.BL || {};
 (function () {
   // Written lessons, and the file that holds each one.
   BL.writtenLessons = {
-    "biology/edexcel/igcse/characteristics-of-living-organisms": "js/lessons/biology-edexcel-igcse.js?v=6",
+    "biology/edexcel/igcse/characteristics-of-living-organisms": "js/lessons/biology-edexcel-igcse.js?v=7",
   };
   BL.lessons = {};
   BL.addLesson = function (key, lesson) { BL.lessons[key] = lesson; };
@@ -40,7 +40,7 @@ window.BL = window.BL || {};
     }).join("");
 
     const characteristics = c.characteristics.map(function (x, i) {
-      return '<article class="trait reveal" id="' + x.id + '"><header class="trait-head"><span class="trait-icon">' + icon(x.icon) + '</span><div><div class="eyebrow">' + t("characteristic") + " " + (i + 1) + " / 8" + (x.en ? " · " + x.en : "") + "</div><h3>" + x.title + "</h3></div></header>" +
+      return '<article class="trait reveal" id="' + x.id + '"><header class="trait-head"><span class="trait-icon">' + icon(x.icon) + '</span><div><div class="eyebrow">' + t("characteristic") + " " + (i + 1) + " / 8" + "</div><h3>" + x.title + '</h3><p class="trait-description">' + x.description + "</p></div></header>" +
         '<div class="trait-grid"><div class="trait-block"><h4>' + L.what + "</h4><p>" + x.what + '</p></div><div class="trait-block"><h4>' + L.why + "</h4><p>" + x.why + "</p></div></div>" +
         '<div class="trait-grid"><div class="trait-block example"><h4>' + L.animals + "</h4><p>" + x.animals + '</p></div><div class="trait-block example"><h4>' + L.plants + "</h4><p>" + x.plants + "</p></div></div>" +
         '<div class="trait-chain"><span class="chain-label">' + L.chain + '</span><div class="chain-steps">' + x.chain.map(function (s) { return "<span>" + s + "</span>"; }).join('<i aria-hidden="true">→</i>') + "</div></div>" +

@@ -499,6 +499,7 @@ h3 { font-size: 1rem; font-weight: 700; margin: 20px 0 10px; }
 .trait-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
 .trait-head .eyebrow { margin-bottom: 2px; }
 .trait-head h3 { margin: 0; font-size: 1.3rem; font-weight: 800; }
+.trait-description { margin-top: 2px; color: var(--muted); font-weight: 600; line-height: 1.35; }
 .trait-icon { width: 52px; height: 52px; border-radius: 15px; box-shadow: 0 8px 18px rgba(10, 111, 147, 0.3); }
 .trait-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
 .trait-block { padding: 12px 14px; border-radius: 12px; background: var(--surface-2); }
