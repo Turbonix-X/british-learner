@@ -2,7 +2,7 @@
 
 iGCSE, AS-Level and A-Level programmes for Maths, Physics, Chemistry, Biology and Computer Science, with Cambridge, Edexcel and AQA (OxfordAQA), plus an interactive periodic table. In English and French.
 
-The lessons are listed and marked as coming soon. The Exam Papers and AI Assistant tabs aren't open yet.
+Most lessons are listed and marked as coming soon. Written lessons are in `js/lessons/`. The Exam Papers and AI Assistant tabs aren't open yet.
 
 ## Run it
 
@@ -19,6 +19,8 @@ python -m http.server 8765
 | `js/data/curriculum.js` | iGCSE programmes, units and lesson names, in English and French |
 | `js/data/curriculum-advanced.js` | AS-Level and A-Level programmes, units and lesson names, in English and French |
 | `js/i18n.js` | Interface text in both languages |
+| `js/lesson.js` | Lesson pages, and the list of written lessons |
+| `js/lessons/` | Written lessons, in English and French |
 | `js/app.js` | Tabs, programme bar, unit tables and page routing |
 | `js/bob.js` | Bob, the robot |
 | `js/fx.js` | Animations |

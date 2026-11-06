@@ -10,11 +10,11 @@
 window.BL = window.BL || {};
 
 BL.subjects = [
-  { id: "maths", en: "Maths", fr: "Maths", icon: "∑" },
-  { id: "physics", en: "Physics", fr: "Physique", icon: "⚛" },
-  { id: "chemistry", en: "Chemistry", fr: "Chimie", icon: "⚗" },
-  { id: "biology", en: "Biology", fr: "Biologie", icon: "❦" },
-  { id: "cs", en: "Computer Science", fr: "Informatique", short: "CS", shortFr: "Info", icon: "⌘" },
+  { id: "maths", en: "Maths", fr: "Maths", icon: '<svg class="subject-icon icon-maths" viewBox="0 0 24 24"><path class="icon-soft" d="M12 3v18M3 12h18"/><path d="M7.500 5v5M5 7.500h5M14 7.500h5M5.500 14.500l4 4M9.500 14.500l-4 4M14 16.500h5"/><circle class="icon-fill" cx="16.500" cy="14.300" r="1"/><circle class="icon-fill" cx="16.500" cy="18.700" r="1"/></svg>' },
+  { id: "physics", en: "Physics", fr: "Physique", icon: '<svg class="subject-icon icon-physics" viewBox="0 0 24 24"><g class="icon-orbits"><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></g><circle class="icon-fill" cx="12" cy="12" r="1.900"/></svg>' },
+  { id: "chemistry", en: "Chemistry", fr: "Chimie", icon: '<svg class="subject-icon icon-chemistry" viewBox="0 0 24 24"><path class="icon-liquid" d="M7.300 15h9.400l2.500 4a1.300 1.300 0 0 1-1.100 2H5.900a1.300 1.300 0 0 1-1.100-2z"/><path d="M9 3h6M10.500 3v6.200L4.700 18.700A1.600 1.600 0 0 0 6.100 21h11.800a1.600 1.600 0 0 0 1.400-2.300L13.500 9.200V3"/><circle class="icon-bubble" cx="10" cy="17.500" r="1"/><circle class="icon-bubble b2" cx="14" cy="18" r=".8"/><circle class="icon-bubble b3" cx="12" cy="12.500" r=".8"/></svg>' },
+  { id: "biology", en: "Biology", fr: "Biologie", icon: '<svg class="subject-icon icon-biology" viewBox="0 0 24 24"><path d="M7 2c0 5 10 5 10 10S7 17 7 22"/><path d="M17 2c0 5-10 5-10 10s10 5 10 10"/><path class="icon-soft" d="M8 4h8M8 10h8M8 14h8M8 20h8"/></svg>' },
+  { id: "cs", en: "Computer Science", fr: "Informatique", short: "CS", shortFr: "Info", icon: '<svg class="subject-icon icon-cs" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path class="icon-code" d="M8.500 8 6 10.500 8.500 13M15.500 8l2.500 2.500-2.500 2.500M13 7.500l-2 6"/></svg>' },
 ];
 BL.boards = [
   { id: "cambridge", name: "Cambridge", full: "Cambridge International" },

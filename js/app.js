@@ -121,8 +121,10 @@
   document.addEventListener("bl-lang", function () {
     drawLang();
     BL.transition(function () {
+      const place = scrollY;
       drawTabs();
       renderRoute(true);
+      window.scrollTo({ top: place, behavior: "auto" });
     });
     BL.bob.lang();
   });
@@ -205,17 +207,18 @@
     document.title = pick(p) + " — British Learner";
     drawBar(subject, board, level);
     setChoice(subject, board, level);
+    const hasWritten = Object.keys(BL.writtenLessons).some(function (k) { return k.indexOf(subject + "/" + board + "/" + level + "/") === 0; });
 
     const units = p.units.map(function (u, i) {
       const rows = u.lessons.map(function (l, n) {
-        return '<li style="--n:' + Math.min(n, 14) + '"><a class="lesson-row" href="#/' + subject + "/" + board + "/" + level + "/" + l.slug + '"><span>' + pick(l) + '</span><span class="lesson-badge">' + t("soon") + "</span></a></li>";
+        return '<li style="--n:' + Math.min(n, 14) + '"><a class="lesson-row" href="#/' + subject + "/" + board + "/" + level + "/" + l.slug + '"><span>' + pick(l) + '</span>' + (BL.writtenLessons[subject + "/" + board + "/" + level + "/" + l.slug] ? '<span class="lesson-badge ready">' + t("fullLesson") + "</span>" : '<span class="lesson-badge">' + t("soon") + "</span>") + "</a></li>";
       }).join("");
       return '<div class="unit reveal" style="--i:' + Math.min(i, 8) + '"><button type="button" class="unit-head" aria-expanded="false"><span class="unit-chevron" aria-hidden="true"></span><span class="unit-title">' + pick(u) + '</span><span class="unit-count">' + u.lessons.length + " " + t(u.lessons.length === 1 ? "lesson" : "lessons") + '</span></button><div class="unit-body"><ul class="unit-lessons">' + rows + "</ul></div></div>";
     }).join("");
 
     setView(
       '<header class="prog-head"><div><div class="eyebrow">' + t("specification") + " " + p.code + '</div><h1 class="page-title">' + pick(p) + "</h1>" +
-      '<p class="muted prog-note">' + (board === "aqa" ? t("aqaNote") + " " : "") + (level === "a" ? t("aIncludesAs") + " " : "") + (subject === "cs" && board === "edexcel" && level !== "igcse" ? t("newCs") + " " : "") + t("officialNote") + '</p></div><div class="prog-stats"><div><strong data-count="' + p.units.length + '">0</strong> ' + t("units") + '</div><div><strong data-count="' + lessonCount + '">0</strong> ' + t("lessons") + '</div><small>' + t("allSoon") + "</small></div></header>" +
+      '<p class="muted prog-note">' + (board === "aqa" ? t("aqaNote") + " " : "") + (level === "a" ? t("aIncludesAs") + " " : "") + (subject === "cs" && board === "edexcel" && level !== "igcse" ? t("newCs") + " " : "") + t("officialNote") + '</p></div><div class="prog-stats"><div><strong data-count="' + p.units.length + '">0</strong> ' + t("units") + '</div><div><strong data-count="' + lessonCount + '">0</strong> ' + t("lessons") + '</div><small>' + t(hasWritten ? "someSoon" : "allSoon") + "</small></div></header>" +
       '<div class="prog-tools"><button type="button" class="btn btn-small" id="toggleAll">' + t("openAll") + "</button></div>" +
       '<section class="units">' + units + "</section>" + (subject === "chemistry" ? periodicButton() : "")
     );
@@ -252,14 +255,36 @@
     const base = "#/" + subject + "/" + board + "/" + level;
     drawBar(subject, board, level);
     document.title = pick(here.lesson) + " — British Learner";
-    setView(
-      '<a class="back-link" href="' + base + '">← ' + pick(p) + "</a>" +
-      '<section class="card soon-card"><div class="eyebrow">' + pick(here.unit) + '</div><h1 class="page-title">' + BL.lettersHtml(pick(here.lesson)) + '</h1><div class="soon-loader" aria-hidden="true"><span></span></div><h2 class="soon-title">' + t("soonTitle") + "</h2><p>" + t("soonText") + "</p>" +
-      '<div class="soon-nav">' +
+    const navHtml = '<div class="soon-nav">' +
       (prev ? '<a class="btn btn-small" href="' + base + "/" + prev.lesson.slug + '" title="' + t("prevLesson") + '">← ' + pick(prev.lesson) + "</a>" : "") +
       '<a class="btn btn-main" href="' + base + '">' + t("backUnits") + "</a>" +
       (next ? '<a class="btn btn-small" href="' + base + "/" + next.lesson.slug + '" title="' + t("nextLesson") + '">' + pick(next.lesson) + " →</a>" : "") +
-      "</div></section>"
+      "</div>";
+    const lessonKey = subject + "/" + board + "/" + level + "/" + slug;
+    if (BL.writtenLessons[lessonKey]) {
+      const show = function () {
+        view.innerHTML = "";
+        BL.renderLesson(view, BL.lessons[lessonKey], { title: pick(here.lesson), unit: pick(here.unit), backHref: base, backLabel: pick(p), navHtml: navHtml });
+        view.classList.remove("view-in");
+        void view.offsetWidth;
+        view.classList.add("view-in");
+        window.scrollTo({ top: 0, behavior: "auto" });
+        finishPage(view);
+        bobOnce("l/" + lessonKey, function () { BL.bob.say(t("bobLesson"), "happy"); });
+      };
+      if (BL.lessons[lessonKey]) { show(); return; }
+      const token = routeToken;
+      loadScript(BL.writtenLessons[lessonKey]).then(function () {
+        if (token === routeToken) show();
+      }).catch(function () {
+        setView('<section class="card soon-card"><h1 class="page-title">' + t("loadError") + "</h1><p>" + t("loadErrorText") + "</p></section>");
+      });
+      return;
+    }
+    setView(
+      '<a class="back-link" href="' + base + '">← ' + pick(p) + "</a>" +
+      '<section class="card soon-card"><div class="eyebrow">' + pick(here.unit) + '</div><h1 class="page-title">' + BL.lettersHtml(pick(here.lesson)) + '</h1><div class="soon-loader" aria-hidden="true"><span></span></div><h2 class="soon-title">' + t("soonTitle") + "</h2><p>" + t("soonText") + "</p>" +
+      navHtml + "</section>"
     );
     bobOnce("l/" + slug, BL.bob.soon);
   }
@@ -294,7 +319,7 @@
         return;
       }
       view.innerHTML = '<div class="loading">' + t("loading") + "</div>";
-      Promise.all([loadScript("js/data/elements.js?v=3"), loadScript("js/data/compounds.js?v=3"), loadScript("js/data/compounds-fr.js?v=3")]).then(function () {
+      Promise.all([loadScript("js/data/elements.js?v=6"), loadScript("js/data/compounds.js?v=6"), loadScript("js/data/compounds-fr.js?v=6")]).then(function () {
         if (token === routeToken) BL.transition(function () { renderRoute(); });
       }).catch(function () {
         setView('<section class="card soon-card"><h1 class="page-title">' + t("loadError") + "</h1><p>" + t("loadErrorText") + "</p></section>");
