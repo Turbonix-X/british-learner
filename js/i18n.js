@@ -142,7 +142,7 @@ window.BL = window.BL || {};
     let saved = null;
     try { saved = localStorage.getItem(KEY); } catch (e) { /* storage unavailable */ }
     if (saved === "en" || saved === "fr") return saved;
-    return (navigator.language || "en").toLowerCase().indexOf("fr") === 0 ? "fr" : "en";
+    return "fr";
   }
 
   BL.lang = initial();
