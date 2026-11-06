@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>British Learner</title>
-  <meta name="description" content="iGCSE programmes for Maths, Physics, Chemistry, Biology and Computer Science with Cambridge, Edexcel and AQA, plus an interactive periodic table. In English and French.">
+  <meta name="description" id="metaDescription" content="iGCSE, AS-Level and A-Level programmes for Maths, Physics, Chemistry, Biology and Computer Science with Cambridge, Edexcel and AQA, plus an interactive periodic table.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <script>
     // The site always follows the browser's light or dark theme.
@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
   <canvas id="fxCanvas" aria-hidden="true"></canvas>
@@ -28,12 +28,13 @@
   <header class="site-header">
     <div class="bl-header">
       <a class="bl-title" href="#/" id="siteTitle">British <span>Learner</span></a>
-      <nav class="subject-tabs" id="subjectTabs"></nav>
       <div class="lang-switch" id="langSwitch" role="group" aria-label="Language / Langue">
         <span class="lang-glider" aria-hidden="true"></span>
         <button type="button" data-lang="en">EN</button>
         <button type="button" data-lang="fr">FR</button>
       </div>
+      <nav class="subject-tabs" id="subjectTabs"></nav>
+      <div class="future-tabs" id="futureTabs"></div>
     </div>
   </header>
 
@@ -48,11 +49,12 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script src="js/data/curriculum.js"></script>
-  <script src="js/i18n.js"></script>
-  <script src="js/fx.js"></script>
-  <script src="js/bob.js"></script>
-  <script src="js/periodic.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/data/curriculum.js?v=3"></script>
+  <script src="js/data/curriculum-advanced.js?v=3"></script>
+  <script src="js/i18n.js?v=3"></script>
+  <script src="js/fx.js?v=3"></script>
+  <script src="js/bob.js?v=3"></script>
+  <script src="js/periodic.js?v=3"></script>
+  <script src="js/app.js?v=3"></script>
 </body>
 </html>

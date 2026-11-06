@@ -12,10 +12,10 @@ window.BL = window.BL || {};
       en: ["Still here! Just recharging my brain.", "Did you know you can click my antenna? Well, all of me, really.", "Revision tip: drink some water. I'd join you, but I'd short-circuit.", "I could explain gravity, but I'd rather float."],
       fr: ["Toujours là ! Je recharge mon cerveau.", "Tu savais que tu pouvais cliquer sur mon antenne ? Enfin, sur tout moi, en fait.", "Conseil de révision : bois de l'eau. Je t'accompagnerais bien, mais je ferais un court-circuit.", "Je pourrais t'expliquer la gravité, mais je préfère flotter."],
     },
-    locked: {
-      en: ["AS-Level and A-Level aren't ready yet. Patience, my friend!", "Locked! I've hidden the key inside my jet.", "Not yet! iGCSEs first."],
-      fr: ["L'AS-Level et l'A-Level ne sont pas encore prêts. Patience, mon ami !", "C'est verrouillé ! J'ai caché la clé dans mon réacteur.", "Pas encore ! Les iGCSE d'abord."],
-    },
+    locked: [
+      { en: "Exam papers aren't open yet. I'm still marking them!", fr: "Les sujets d'examen ne sont pas encore ouverts. Je suis encore en train de les corriger !" },
+      { en: "My AI cousin is still at school. Coming soon!", fr: "Mon cousin l'IA est encore à l'école. Bientôt là !" },
+    ],
     soon: {
       en: ["This one's still in my to-do list. It's a very long list.", "Coming soon! I'm typing as fast as my tiny hands allow.", "This lesson is loading… slowly… very slowly…"],
       fr: ["Celle-ci est encore sur ma liste. Une très longue liste.", "Bientôt ! Je tape aussi vite que mes petites mains le permettent.", "Cette leçon charge… lentement… très lentement…"],
@@ -132,7 +132,7 @@ window.BL = window.BL || {};
   BL.bob = {
     say: say,
     hello: function () { say(pickLine(LINES.hello), "hello"); },
-    locked: function () { say(pickLine(LINES.locked), "shock"); replay("shake"); },
+    locked: function (i) { say(LINES.locked[i][BL.lang], "shock"); replay("shake"); },
     soon: function () { say(pickLine(LINES.soon), "think"); },
     subject: function (id) { say(LINES.subject[id][BL.lang], "happy"); },
     board: function () { say(LINES.board[BL.lang], "happy"); replay("hop"); },

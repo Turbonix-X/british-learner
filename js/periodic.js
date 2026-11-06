@@ -27,7 +27,7 @@ window.BL = window.BL || {};
     { id: "ie", label: "mIe", key: "ie", unit: "kJ/mol" },
   ];
   const DECAYS = {
-    "A": { en: "Alpha decay", fr: "Désintégration alpha" }, "B-": { en: "Beta-minus decay", fr: "Désintégration bêta moins" }, "B+": { en: "Positron emission", fr: "Émission de positon" }, "EC": { en: "Electron capture", fr: "Capture électronique" }, "EC+B+": { en: "Electron capture or positron emission", fr: "Capture électronique ou émission de positon" }, "SF": { en: "Spontaneous fission", fr: "Fission spontanée" }, "P": { en: "Proton emission", fr: "Émission de proton" }, "N": { en: "Neutron emission", fr: "Émission de neutron" }, "2N": { en: "Two-neutron emission", fr: "Émission de deux neutrons" }, "2P": { en: "Two-proton emission", fr: "Émission de deux protons" }, "IT": { en: "Isomeric transition", fr: "Transition isomérique" }, "2B-": { en: "Double beta decay", fr: "Double désintégration bêta" }, "2EC": { en: "Double electron capture", fr: "Double capture électronique" }, "B-N": { en: "Beta decay with neutron emission", fr: "Désintégration bêta avec émission de neutron" },
+    "A": { en: "Alpha decay", fr: "Désintégration alpha" }, "B-": { en: "Beta-minus decay", fr: "Désintégration bêta moins" }, "B+": { en: "Positron emission", fr: "Émission de positon" }, "EC": { en: "Electron capture", fr: "Capture électronique" }, "EC+B+": { en: "Electron capture or positron emission", fr: "Capture électronique ou émission de positon" }, "SF": { en: "Spontaneous fission", fr: "Fission spontanée" }, "P": { en: "Proton emission", fr: "Émission de proton" }, "N": { en: "Neutron emission", fr: "Émission de neutron" }, "2N": { en: "Two-neutron emission", fr: "Émission de deux neutrons" }, "2P": { en: "Two-proton emission", fr: "Émission de deux protons" }, "IT": { en: "Isomeric transition", fr: "Transition isomérique" }, "2B-": { en: "Double beta decay", fr: "Double désintégration bêta" }, "2EC": { en: "Double electron capture", fr: "Double capture électronique" }, "B-N": { en: "Beta decay with neutron emission", fr: "Désintégration bêta avec émission de neutron" }, "B-A": { en: "Beta decay with alpha emission", fr: "Désintégration bêta avec émission alpha" }, "2B+": { en: "Double positron emission", fr: "Double émission de positon" },
   };
   const BASICS = [
     { c: "#14d9a8", en: ["Proton", "A positively charged particle (+1) in the nucleus, with a relative mass of 1. The number of protons is the atomic number, and it decides which element an atom is."], fr: ["Proton", "Particule de charge positive (+1) située dans le noyau, de masse relative 1. Le nombre de protons est le numéro atomique : il détermine de quel élément il s'agit."] },
@@ -52,6 +52,28 @@ window.BL = window.BL || {};
 
   /* ---------- Reading the data in the current language ---------- */
   function fr() { return BL.lang === "fr"; }
+  const DISCOVERY_FR = {
+    "Ancient Egypt": "Égypte antique", "Ancient china": "Chine antique", "Bronze Age": "Âge du bronze", "India": "Inde", "Middle East": "Moyen-Orient",
+    "Joint Institute for Nuclear Research": "Institut unifié de recherches nucléaires", "Lawrence Berkeley National Laboratory": "Laboratoire national Lawrence-Berkeley",
+    "Gesellschaft für Schwerionenforschung": "Centre de recherche sur les ions lourds (GSI)",
+  };
+  function cleanPerson(name) { return String(name).replace(/ \(chemist\)$/, ""); }
+  function discoveredBy(e) {
+    const d = e.dis;
+    if (!d) return t("unknown");
+    if (!fr()) return cleanPerson(d).replace(/^unknown/, "Unknown").replace(/^Ancient china$/, "Ancient China");
+    if (DISCOVERY_FR[d]) return DISCOVERY_FR[d];
+    const before = d.match(/^unknown, before (\d+) BCE?$/);
+    if (before) return "Inconnu, avant " + before[1] + " av. J.-C.";
+    if (/^\d+ BC$/.test(d)) return "Vers " + d.replace(" BC", "") + " av. J.-C.";
+    return cleanPerson(d);
+  }
+  function namedBy(e) {
+    // The source data has a few page titles here instead of a person's name.
+    if (!e.nb || /^Isotopes of /.test(e.nb)) return t("notRecorded");
+    return cleanPerson(e.nb);
+  }
+  function wikiLink(e) { return fr() && e.ft ? "https://fr.wikipedia.org/wiki/" + encodeURIComponent(e.ft.replace(/ /g, "_")) : e.src; }
   function elName(e) { return fr() ? e.nf : e.n; }
   function elSummary(e) { return fr() && e.sf ? e.sf : e.su; }
   function elUses(e) {
@@ -106,7 +128,7 @@ window.BL = window.BL || {};
     return String(text).replace("years", "ans").replace("days", "jours").replace("hours", "heures").replace(/(\d)\.(\d)/g, "$1,$2");
   }
   function sourceNote() {
-    return '<p class="source-note">' + t("sources") + ' : <a href="https://github.com/Bowserinator/Periodic-Table-JSON" target="_blank" rel="noopener">Periodic-Table-JSON</a>, <a href="https://pubchem.ncbi.nlm.nih.gov/periodic-table/" target="_blank" rel="noopener">PubChem</a>, <a href="https://www-nds.iaea.org/relnsd/vcharthtml/VChartHTML.html" target="_blank" rel="noopener">IAEA LiveChart of Nuclides</a>. ' + t("sourceText") + "</p>";
+    return '<p class="source-note">' + t("sources") + (fr() ? " : " : ": ") + '<a href="https://github.com/Bowserinator/Periodic-Table-JSON" target="_blank" rel="noopener">Periodic-Table-JSON</a>, <a href="https://pubchem.ncbi.nlm.nih.gov/periodic-table/" target="_blank" rel="noopener">PubChem</a>, <a href="https://www-nds.iaea.org/relnsd/vcharthtml/VChartHTML.html" target="_blank" rel="noopener">' + (fr() ? "Carte des nucléides de l'AIEA" : "IAEA LiveChart of Nuclides") + '</a>. ' + t("sourceText") + "</p>";
   }
   function basicsHtml(list) {
     return '<div class="explain-grid">' + list.map(function (b, i) {
@@ -425,7 +447,7 @@ window.BL = window.BL || {};
       [t("atomicNumber"), e.z], [t("relMass"), mass(e)], [t("group"), e.y >= 8 ? (fr() ? "Bloc f" : "f-block") : e.g], [t("period"), e.p], [t("block"), fr() ? "Bloc " + e.b : e.b + "-block"], [t("stateAt"), e.z >= 104 ? t("unknown") : stateName(e.ph)],
       [t("melting"), e.mp ? num(kToC(e.mp)) + " °C" : t("unknown")], [t("boiling"), e.bp ? num(kToC(e.bp)) + " °C" : t("unknown")], [t("density"), density],
       [t("electronegativity"), fmt(e.en)], [t("firstIon"), fmt(e.ie, " kJ/mol")], [t("affinity"), fmt(e.ea, " kJ/mol")], [t("radius"), fmt(radiusOf(e), " pm")], [t("oxidation"), e.ox || t("unknown")],
-      [t("molarHeat"), fmt(e.mh, " J/(mol·K)")], [t("discovered"), e.dis || t("unknown")], [t("year"), e.yr === "Ancient" ? (fr() ? "Antiquité" : "Ancient") : (e.yr || t("unknown"))], [t("named"), e.nb || t("notRecorded")],
+      [t("molarHeat"), fmt(e.mh, " J/(mol·K)")], [t("discovered"), discoveredBy(e)], [t("year"), e.yr === "Ancient" ? (fr() ? "Antiquité" : "Ancient") : (e.yr || t("unknown"))], [t("named"), namedBy(e)],
     ];
 
     host.innerHTML =
@@ -440,7 +462,7 @@ window.BL = window.BL || {};
       '<div class="atom-stepper"><span>' + t("ionCharge") + '</span><button type="button" id="chargeDown" aria-label="' + t("addElectron") + '">−</button><span id="chargeValue">0</span><button type="button" id="chargeUp" aria-label="' + t("removeElectron") + '">+</button></div>' +
       '<button type="button" class="btn btn-small" id="atomPause">' + t("pause") + '</button></div><div class="atom-readout" id="atomReadout"></div><div class="atom-info" id="atomInfo"></div></section>' +
 
-      '<section class="card"><h2>' + t("properties") + '</h2><div class="fact-grid">' + facts.map(function (f) { return '<div class="fact"><small>' + f[0] + "</small><b>" + esc(f[1]) + "</b></div>"; }).join("") + "</div><h3>" + t("electronsPerShell") + '</h3><div class="shell-bars">' + e.sh.map(function (c, i) { return "<span>" + t("shell") + " " + (i + 1) + " : ".slice(fr() ? 0 : 1) + c + "</span>"; }).join("") + "</div><h3>" + t("appearance") + '</h3><p class="small">' + esc(appearance || t("noAppearance")) + '</p><p class="small" style="margin-top:12px"><a href="' + e.src + '" target="_blank" rel="noopener">' + t("readMore") + "</a></p></section></div>" +
+      '<section class="card"><h2>' + t("properties") + '</h2><div class="fact-grid">' + facts.map(function (f) { return '<div class="fact"><small>' + f[0] + "</small><b>" + esc(f[1]) + "</b></div>"; }).join("") + "</div><h3>" + t("electronsPerShell") + '</h3><div class="shell-bars">' + e.sh.map(function (c, i) { return "<span>" + t("shell") + " " + (i + 1) + " : ".slice(fr() ? 0 : 1) + c + "</span>"; }).join("") + "</div><h3>" + t("appearance") + '</h3><p class="small">' + esc(appearance || t("noAppearance")) + '</p><p class="small" style="margin-top:12px"><a href="' + wikiLink(e) + '" target="_blank" rel="noopener">' + t("readMore") + "</a></p></section></div>" +
 
       '<section class="card section-card reveal"><h2>' + t("readingEl") + '</h2><p id="readingAid" style="margin-top:10px;line-height:1.6"></p></section>' +
 

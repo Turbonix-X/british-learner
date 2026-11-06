@@ -2,15 +2,16 @@
    Addresses:
      #/                              home
      #/physics                       subject
-     #/physics/edexcel               iGCSE programme
-     #/physics/edexcel/lesson-slug   lesson page
+     #/physics/edexcel               choose a level
+     #/physics/edexcel/igcse               programme
+     #/physics/edexcel/igcse/lesson-slug   lesson page
      #/chemistry/periodic-table      periodic table
      #/chemistry/periodic-table/Fe   element page */
 (function () {
   const view = document.getElementById("view");
   const bar = document.getElementById("programBar");
   const tabs = document.getElementById("subjectTabs");
-  const CHOICE_KEY = "bl-board";
+  const CHOICE_KEY = "bl-choice";
   const loaded = {};
   const t = BL.t, pick = BL.pick;
   let lastBobKey = "";
@@ -34,9 +35,9 @@
   };
 
   function getChoices() { try { return JSON.parse(localStorage.getItem(CHOICE_KEY)) || {}; } catch (e) { return {}; } }
-  function setChoice(subject, board) {
+  function setChoice(subject, board, level) {
     const all = getChoices();
-    all[subject] = board;
+    all[subject] = { board: board, level: level };
     try { localStorage.setItem(CHOICE_KEY, JSON.stringify(all)); } catch (e) { /* storage unavailable */ }
   }
   function loadScript(src) {
@@ -52,11 +53,14 @@
   }
   function subjectOf(id) { return BL.subjects.find(function (s) { return s.id === id; }); }
   function boardOf(id) { return BL.boards.find(function (b) { return b.id === id; }); }
+  function levelOf(id) { return BL.levels.find(function (l) { return l.id === id; }); }
   function countLessons() {
     let total = 0;
     BL.subjects.forEach(function (s) {
       BL.boards.forEach(function (b) {
-        BL.getProgramme(s.id, b.id).units.forEach(function (u) { total += u.lessons.length; });
+        BL.levels.forEach(function (l) {
+          BL.getProgramme(s.id, b.id, l.id).units.forEach(function (u) { total += u.lessons.length; });
+        });
       });
     });
     return total;
@@ -71,6 +75,17 @@
       const short = BL.lang === "fr" ? s.shortFr : s.short;
       return '<a class="subject-tab" data-s="' + s.id + '" href="#/' + s.id + '"><span class="st-full">' + pick(s) + '</span><span class="st-short">' + (short || pick(s)) + "</span></a>";
     }).join("") + '<span class="tab-glider" aria-hidden="true"></span>';
+    // These two sections aren't open yet.
+    const future = document.getElementById("futureTabs");
+    future.innerHTML = '<button type="button" class="future-tab" aria-disabled="true" title="' + t("soon") + '">' + t("examPapers") + '</button><button type="button" class="future-tab" aria-disabled="true" title="' + t("soon") + '">' + t("aiAssistant") + "</button>";
+    future.querySelectorAll(".future-tab").forEach(function (btn, i) {
+      btn.addEventListener("click", function () {
+        btn.classList.remove("nope");
+        void btn.offsetWidth;
+        btn.classList.add("nope");
+        BL.bob.locked(i);
+      });
+    });
   }
   function moveGlider() {
     const active = tabs.querySelector(".subject-tab.active");
@@ -97,6 +112,7 @@
     langSwitch.dataset.active = BL.lang;
     langSwitch.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === BL.lang)); });
     document.getElementById("rights").textContent = t("rights");
+    document.getElementById("metaDescription").content = t("metaDescription");
   }
   langSwitch.addEventListener("click", function (e) {
     const b = e.target.closest("button");
@@ -112,28 +128,19 @@
   });
 
   /* ---------- Programme bar ---------- */
-  function drawBar(subject, board) {
+  function drawBar(subject, board, level) {
     bar.hidden = false;
     let html = '<div class="pb-inner"><div class="pb-group" role="group" aria-label="' + t("board") + '"><span class="pb-label">' + t("board") + '</span><div class="pb-seg">' +
       BL.boards.map(function (b) {
-        return '<a class="pb-btn' + (board === b.id ? " active" : "") + '" href="#/' + subject + "/" + b.id + '">' + b.name + "</a>";
+        return '<a class="pb-btn' + (board === b.id ? " active" : "") + '" href="#/' + subject + "/" + b.id + (level ? "/" + level : "") + '">' + b.name + "</a>";
       }).join("") + "</div></div>";
     if (board) {
       html += '<div class="pb-group pb-levels" role="group" aria-label="' + t("level") + '"><span class="pb-label">' + t("level") + '</span><div class="pb-seg">' +
         BL.levels.map(function (l) {
-          if (l.open) return '<a class="pb-btn alt active" href="#/' + subject + "/" + board + '">' + l.name + "</a>";
-          return '<button type="button" class="pb-btn locked" aria-disabled="true" title="' + t("soon") + '">' + l.name + "</button>";
+          return '<a class="pb-btn alt' + (level === l.id ? " active" : "") + '" href="#/' + subject + "/" + board + "/" + l.id + '">' + l.name + "</a>";
         }).join("") + "</div></div>";
     }
     bar.innerHTML = html + "</div>";
-    bar.querySelectorAll(".locked").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        btn.classList.remove("nope");
-        void btn.offsetWidth;
-        btn.classList.add("nope");
-        BL.bob.locked();
-      });
-    });
   }
 
   /* ---------- Pages ---------- */
@@ -155,7 +162,7 @@
     return '<a class="periodic-cta reveal" data-tilt href="#/chemistry/periodic-table"><span class="pc-tiles" aria-hidden="true"><i>H</i><i>He</i><i>Li</i><i>C</i></span><span class="pc-text"><strong>' + t("ptCtaTitle") + "</strong><small>" + t("ptCtaText") + '</small></span><span class="pc-arrow" aria-hidden="true">→</span></a>';
   }
 
-  const FLOATERS = ["E = mc²", "H₂O", "π", "x² + y² = r²", "F = ma", "DNA", "CO₂", "0101", "∑", "v = fλ", "NaCl", "sin θ", "C₆H₁₂O₆", "if (x)"];
+  const FLOATERS = ["E = mc²", "H₂O", "π", "x² + y² = r²", "F = ma", { en: "DNA", fr: "ADN" }, "CO₂", "0101", "∑", "v = fλ", "NaCl", "sin θ", "C₆H₁₂O₆", { en: "if (x)", fr: "si (x)" }];
   function homePage() {
     bar.hidden = true;
     setActiveTab(null);
@@ -163,7 +170,7 @@
     const floaters = FLOATERS.map(function (f, i) {
       // Formulas stay in the side margins, so they never sit behind the text.
       const left = i % 2 ? 87 + ((i * 5) % 9) : 1 + ((i * 7) % 9), top = 4 + ((i * 53) % 88);
-      return '<span class="floater" style="left:' + left + "%;top:" + top + "%;--d:" + (5 + (i % 5)) + "s;--o:" + (i * 0.4) + 's">' + f + "</span>";
+      return '<span class="floater" style="left:' + left + "%;top:" + top + "%;--d:" + (5 + (i % 5)) + "s;--o:" + (i * 0.4) + 's">' + (f.en ? pick(f) : f) + "</span>";
     }).join("");
     setView(
       '<section class="hero"><div class="hero-floaters" aria-hidden="true">' + floaters + '</div><h1 class="hero-title"><span class="hero-line">' + BL.lettersHtml(t("heroLine1")) + '</span><span class="hero-line gradient-text">' + BL.lettersHtml(t("heroLine2"), 12) + '</span></h1>' +
@@ -176,35 +183,39 @@
     bobOnce("home", BL.bob.hello);
   }
 
-  function subjectPage(subject) {
+  function subjectPage(subject, board) {
     const s = subjectOf(subject);
     document.title = pick(s) + " — British Learner";
-    drawBar(subject, null);
-    const options = BL.boards.map(function (b, i) {
-      return '<a class="choice-card" data-tilt style="--i:' + i + '" href="#/' + subject + "/" + b.id + '"><span class="card-shine" aria-hidden="true"></span><strong>' + b.name + "</strong><small>" + b.full + "</small></a>";
-    }).join("");
-    setView('<section class="choose"><span class="choose-icon" aria-hidden="true">' + s.icon + '</span><h1 class="page-title">' + BL.lettersHtml(pick(s)) + '</h1><p class="muted">' + t("chooseBoard") + '</p><div class="choice-grid">' + options + "</div></section>" + (subject === "chemistry" ? periodicButton() : ""));
-    bobOnce("s/" + subject, function () { BL.bob.subject(subject); });
+    drawBar(subject, board || null, null);
+    const options = board
+      ? BL.levels.map(function (l, i) {
+        return '<a class="choice-card" data-tilt style="--i:' + i + '" href="#/' + subject + "/" + board + "/" + l.id + '"><span class="card-shine" aria-hidden="true"></span><strong>' + l.name + "</strong><small>" + pick(BL.getProgramme(subject, board, l.id)) + "</small></a>";
+      }).join("")
+      : BL.boards.map(function (b, i) {
+        return '<a class="choice-card" data-tilt style="--i:' + i + '" href="#/' + subject + "/" + b.id + '"><span class="card-shine" aria-hidden="true"></span><strong>' + b.name + "</strong><small>" + b.full + "</small></a>";
+      }).join("");
+    setView('<section class="choose"><span class="choose-icon" aria-hidden="true">' + s.icon + '</span><h1 class="page-title">' + BL.lettersHtml(pick(s)) + '</h1><p class="muted">' + t(board ? "chooseLevel" : "chooseBoard") + '</p><div class="choice-grid">' + options + "</div></section>" + (subject === "chemistry" ? periodicButton() : ""));
+    bobOnce("s/" + subject + "/" + (board || ""), function () { if (board) BL.bob.board(); else BL.bob.subject(subject); });
   }
 
-  function programmePage(subject, board) {
-    const p = BL.getProgramme(subject, board);
+  function programmePage(subject, board, level) {
+    const p = BL.getProgramme(subject, board, level);
     let lessonCount = 0;
     p.units.forEach(function (u) { lessonCount += u.lessons.length; });
     document.title = pick(p) + " — British Learner";
-    drawBar(subject, board);
-    setChoice(subject, board);
+    drawBar(subject, board, level);
+    setChoice(subject, board, level);
 
     const units = p.units.map(function (u, i) {
       const rows = u.lessons.map(function (l, n) {
-        return '<li style="--n:' + Math.min(n, 14) + '"><a class="lesson-row" href="#/' + subject + "/" + board + "/" + l.slug + '"><span>' + pick(l) + '</span><span class="lesson-badge">' + t("soon") + "</span></a></li>";
+        return '<li style="--n:' + Math.min(n, 14) + '"><a class="lesson-row" href="#/' + subject + "/" + board + "/" + level + "/" + l.slug + '"><span>' + pick(l) + '</span><span class="lesson-badge">' + t("soon") + "</span></a></li>";
       }).join("");
       return '<div class="unit reveal" style="--i:' + Math.min(i, 8) + '"><button type="button" class="unit-head" aria-expanded="false"><span class="unit-chevron" aria-hidden="true"></span><span class="unit-title">' + pick(u) + '</span><span class="unit-count">' + u.lessons.length + " " + t(u.lessons.length === 1 ? "lesson" : "lessons") + '</span></button><div class="unit-body"><ul class="unit-lessons">' + rows + "</ul></div></div>";
     }).join("");
 
     setView(
       '<header class="prog-head"><div><div class="eyebrow">' + t("specification") + " " + p.code + '</div><h1 class="page-title">' + pick(p) + "</h1>" +
-      '<p class="muted prog-note">' + (board === "aqa" ? t("aqaNote") + " " : "") + t("officialNote") + '</p></div><div class="prog-stats"><div><strong data-count="' + p.units.length + '">0</strong> ' + t("units") + '</div><div><strong data-count="' + lessonCount + '">0</strong> ' + t("lessons") + '</div><small>' + t("allSoon") + "</small></div></header>" +
+      '<p class="muted prog-note">' + (board === "aqa" ? t("aqaNote") + " " : "") + (level === "a" ? t("aIncludesAs") + " " : "") + (subject === "cs" && board === "edexcel" && level !== "igcse" ? t("newCs") + " " : "") + t("officialNote") + '</p></div><div class="prog-stats"><div><strong data-count="' + p.units.length + '">0</strong> ' + t("units") + '</div><div><strong data-count="' + lessonCount + '">0</strong> ' + t("lessons") + '</div><small>' + t("allSoon") + "</small></div></header>" +
       '<div class="prog-tools"><button type="button" class="btn btn-small" id="toggleAll">' + t("openAll") + "</button></div>" +
       '<section class="units">' + units + "</section>" + (subject === "chemistry" ? periodicButton() : "")
     );
@@ -228,18 +239,18 @@
       toggle.textContent = t(allOpen ? "closeAll" : "openAll");
     });
     if (heads[0]) heads[0].click();
-    bobOnce("p/" + subject + "/" + board, BL.bob.board);
+    bobOnce("p/" + subject + "/" + board + "/" + level, BL.bob.board);
   }
 
-  function lessonPage(subject, board, slug) {
-    const p = BL.getProgramme(subject, board);
+  function lessonPage(subject, board, level, slug) {
+    const p = BL.getProgramme(subject, board, level);
     const flat = [];
     p.units.forEach(function (u) { u.lessons.forEach(function (l) { flat.push({ lesson: l, unit: u }); }); });
     const index = flat.findIndex(function (x) { return x.lesson.slug === slug; });
     if (index < 0) { notFound(); return; }
     const here = flat[index], prev = flat[index - 1], next = flat[index + 1];
-    const base = "#/" + subject + "/" + board;
-    drawBar(subject, board);
+    const base = "#/" + subject + "/" + board + "/" + level;
+    drawBar(subject, board, level);
     document.title = pick(here.lesson) + " — British Learner";
     setView(
       '<a class="back-link" href="' + base + '">← ' + pick(p) + "</a>" +
@@ -283,7 +294,7 @@
         return;
       }
       view.innerHTML = '<div class="loading">' + t("loading") + "</div>";
-      Promise.all([loadScript("js/data/elements.js"), loadScript("js/data/compounds.js"), loadScript("js/data/compounds-fr.js")]).then(function () {
+      Promise.all([loadScript("js/data/elements.js?v=3"), loadScript("js/data/compounds.js?v=3"), loadScript("js/data/compounds-fr.js?v=3")]).then(function () {
         if (token === routeToken) BL.transition(function () { renderRoute(); });
       }).catch(function () {
         setView('<section class="card soon-card"><h1 class="page-title">' + t("loadError") + "</h1><p>" + t("loadErrorText") + "</p></section>");
@@ -293,13 +304,16 @@
 
     if (path.length === 1 && !sameRoute) {
       const saved = getChoices()[subject];
-      if (saved && boardOf(saved)) { location.replace("#/" + subject + "/" + saved); return; }
+      if (saved && boardOf(saved.board) && levelOf(saved.level)) { location.replace("#/" + subject + "/" + saved.board + "/" + saved.level); return; }
     }
-    const board = path[1], slug = path[2];
+    const board = path[1];
+    let level = path[2], slug = path[3];
     if (board && !boardOf(board)) { notFound(); return; }
-    if (slug) lessonPage(subject, board, slug);
-    else if (board) programmePage(subject, board);
-    else subjectPage(subject);
+    // Links from before AS and A-Level were added have no level, so they mean iGCSE.
+    if (level && !levelOf(level)) { slug = level; level = "igcse"; }
+    if (slug) lessonPage(subject, board, level, slug);
+    else if (level) programmePage(subject, board, level);
+    else subjectPage(subject, board);
   }
 
   addEventListener("hashchange", function () { BL.transition(function () { renderRoute(); }); });

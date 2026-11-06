@@ -22,18 +22,18 @@ BL.boards = [
   { id: "aqa", name: "AQA", full: "OxfordAQA" },
 ];
 BL.levels = [
-  { id: "igcse", name: "iGCSE", open: true },
-  { id: "as", name: "AS-Level", open: false },
-  { id: "a", name: "A-Level", open: false },
+  { id: "igcse", name: "iGCSE" },
+  { id: "as", name: "AS-Level" },
+  { id: "a", name: "A-Level" },
 ];
 
 BL.programmes = {
 maths: {
-cambridge: { en: "Cambridge IGCSE Mathematics", fr: "Cambridge IGCSE Mathématiques", code: "0580", text: `
+cambridge: { en: "Cambridge IGCSE Mathematics", fr: "Mathématiques – IGCSE Cambridge", code: "0580", text: `
 # 1. Number :: 1. Nombres
-Types of number :: Types de nombres; Sets :: Ensembles; Powers and roots :: Puissances et racines; Fractions, decimals and percentages :: Fractions, décimaux et pourcentages; Ordering :: Rangement; The four operations :: Les quatre opérations; Indices I :: Indices I; Standard form :: Écriture scientifique; Estimation :: Estimation; Limits of accuracy :: Limites de précision; Ratio and proportion :: Ratio et proportion; Rates :: Taux; Percentages :: Pourcentages; Using a calculator :: Utiliser une calculatrice; Time :: Temps; Money :: Argent; Exponential growth and decay :: Croissance et décroissance exponentielles; Surds :: Radicaux
+Types of number :: Types de nombres; Sets :: Ensembles; Powers and roots :: Puissances et racines; Fractions, decimals and percentages :: Fractions, décimaux et pourcentages; Ordering :: Rangement; The four operations :: Les quatre opérations; Indices I :: Exposants I; Standard form :: Écriture scientifique; Estimation :: Estimation; Limits of accuracy :: Limites de précision; Ratio and proportion :: Ratio et proportion; Rates :: Taux; Percentages :: Pourcentages; Using a calculator :: Utiliser une calculatrice; Time :: Temps; Money :: Argent; Exponential growth and decay :: Croissance et décroissance exponentielles; Surds :: Radicaux
 # 2. Algebra and graphs :: 2. Algèbre et graphiques
-Introduction to algebra :: Introduction à l'algèbre; Algebraic manipulation :: Calcul algébrique; Algebraic fractions :: Fractions algébriques; Indices II :: Indices II; Equations :: Équations; Inequalities :: Inéquations; Sequences :: Suites; Proportion :: Proportionnalité; Graphs in practical situations :: Graphiques de situations concrètes; Graphs of functions :: Graphiques de fonctions; Sketching curves :: Esquisser des courbes; Differentiation :: Dérivation; Functions :: Fonctions
+Introduction to algebra :: Introduction à l'algèbre; Algebraic manipulation :: Calcul algébrique; Algebraic fractions :: Fractions algébriques; Indices II :: Exposants II; Equations :: Équations; Inequalities :: Inéquations; Sequences :: Suites; Proportion :: Proportionnalité; Graphs in practical situations :: Graphiques de situations concrètes; Graphs of functions :: Graphiques de fonctions; Sketching curves :: Esquisser des courbes; Differentiation :: Dérivation; Functions :: Fonctions
 # 3. Coordinate geometry :: 3. Géométrie analytique
 Coordinates :: Coordonnées; Drawing linear graphs :: Tracer des droites; Gradient of linear graphs :: Pente d'une droite; Length and midpoint :: Longueur et milieu; Equations of linear graphs :: Équations de droites; Parallel lines :: Droites parallèles; Perpendicular lines :: Droites perpendiculaires
 # 4. Geometry :: 4. Géométrie
@@ -48,7 +48,7 @@ Transformations :: Transformations; Vectors in two dimensions :: Vecteurs en deu
 Introduction to probability :: Introduction aux probabilités; Relative and expected frequencies :: Fréquences relatives et attendues; Probability of combined events :: Probabilité d'événements combinés; Conditional probability :: Probabilité conditionnelle
 # 9. Statistics :: 9. Statistiques
 Classifying statistical data :: Classer des données statistiques; Interpreting statistical data :: Interpréter des données statistiques; Averages and measures of spread :: Moyennes et mesures de dispersion; Statistical charts and diagrams :: Graphiques et diagrammes statistiques; Scatter diagrams :: Nuages de points; Cumulative frequency diagrams :: Diagrammes de fréquences cumulées; Histograms :: Histogrammes` },
-edexcel: { en: "Pearson Edexcel International GCSE Mathematics A", fr: "Pearson Edexcel International GCSE Mathématiques A", code: "4MA1", text: `
+edexcel: { en: "Pearson Edexcel International GCSE Mathematics A", fr: "Mathématiques A – GCSE international Pearson Edexcel", code: "4MA1", text: `
 # 1. Numbers and the number system :: 1. Les nombres et le système de numération
 Integers :: Nombres entiers; Fractions :: Fractions; Decimals :: Décimaux; Powers and roots :: Puissances et racines; Surds :: Radicaux; Set language and notation :: Langage et notation des ensembles; Percentages :: Pourcentages; Ratio and proportion :: Ratio et proportion; Degree of accuracy :: Degré de précision; Upper and lower bounds :: Bornes supérieure et inférieure; Standard form :: Écriture scientifique; Applying number :: Appliquer les nombres; Electronic calculators :: Calculatrices électroniques
 # 2. Equations, formulae and identities :: 2. Équations, formules et identités
@@ -61,7 +61,7 @@ Angles, lines and triangles :: Angles, droites et triangles; Polygons :: Polygon
 Vectors :: Vecteurs; Transformation geometry :: Transformations géométriques
 # 6. Statistics and probability :: 6. Statistiques et probabilités
 Graphical representation of data :: Représentation graphique des données; Statistical measures :: Mesures statistiques; Probability :: Probabilités` },
-aqa: { en: "OxfordAQA International GCSE Mathematics", fr: "OxfordAQA International GCSE Mathématiques", code: "9260", text: `
+aqa: { en: "OxfordAQA International GCSE Mathematics", fr: "Mathématiques – GCSE international OxfordAQA", code: "9260", text: `
 # Number: structure and calculation :: Nombres : structure et calcul
 Ordering numbers :: Ranger des nombres; The four operations :: Les quatre opérations; Factors, multiples and primes :: Facteurs, multiples et nombres premiers; Powers and roots :: Puissances et racines; Standard form :: Écriture scientifique; Surds :: Radicaux; Rounding and estimation :: Arrondis et estimation; Bounds :: Bornes
 # Number: fractions, decimals and percentages :: Nombres : fractions, décimaux et pourcentages
@@ -91,7 +91,7 @@ Measures of probability :: Mesures de probabilité; Experimental and theoretical
 },
 
 physics: {
-cambridge: { en: "Cambridge IGCSE Physics", fr: "Cambridge IGCSE Physique", code: "0625", text: `
+cambridge: { en: "Cambridge IGCSE Physics", fr: "Physique – IGCSE Cambridge", code: "0625", text: `
 # 1. Motion, forces and energy :: 1. Mouvement, forces et énergie
 Physical quantities and measurement techniques :: Grandeurs physiques et techniques de mesure; Motion :: Mouvement; Mass and weight :: Masse et poids; Density :: Masse volumique; Effects of forces :: Effets des forces; Turning effect of forces :: Effet de rotation des forces; Centre of gravity :: Centre de gravité; Momentum :: Quantité de mouvement; Energy :: Énergie; Work :: Travail; Energy resources :: Ressources énergétiques; Efficiency :: Rendement; Power :: Puissance; Pressure :: Pression
 # 2. Thermal physics :: 2. Physique thermique
@@ -104,7 +104,7 @@ Simple phenomena of magnetism :: Phénomènes simples du magnétisme; Electric c
 The atom :: L'atome; The nucleus :: Le noyau; Detection of radioactivity :: Détection de la radioactivité; The three types of nuclear emission :: Les trois types d'émission nucléaire; Radioactive decay :: Désintégration radioactive; Half-life :: Demi-vie; Safety precautions :: Précautions de sécurité
 # 6. Space physics :: 6. Physique de l'espace
 The Earth :: La Terre; The Solar System :: Le Système solaire; The Sun as a star :: Le Soleil, une étoile; Stars :: Étoiles; The Universe :: L'Univers` },
-edexcel: { en: "Pearson Edexcel International GCSE Physics", fr: "Pearson Edexcel International GCSE Physique", code: "4PH1", text: `
+edexcel: { en: "Pearson Edexcel International GCSE Physics", fr: "Physique – GCSE international Pearson Edexcel", code: "4PH1", text: `
 # 1. Forces and motion :: 1. Forces et mouvement
 Units in forces and motion :: Unités des forces et du mouvement; Movement and position :: Mouvement et position; Distance-time graphs :: Graphiques distance-temps; Acceleration and velocity-time graphs :: Accélération et graphiques vitesse-temps; Effects of forces :: Effets des forces; Force, mass and acceleration :: Force, masse et accélération; Weight and terminal velocity :: Poids et vitesse limite; Stopping distance :: Distance d'arrêt; Hooke's law and elastic behaviour :: Loi de Hooke et élasticité; Momentum :: Quantité de mouvement; Newton's third law :: Troisième loi de Newton; Moments :: Moments
 # 2. Electricity :: 2. Électricité
@@ -121,7 +121,7 @@ Units in magnetism :: Unités du magnétisme; Magnetism :: Magnétisme; Electrom
 Units in radioactivity :: Unités de la radioactivité; Radioactivity :: Radioactivité; Half-life :: Demi-vie; Uses and dangers of radiation :: Usages et dangers des rayonnements; Fission and fusion :: Fission et fusion
 # 8. Astrophysics :: 8. Astrophysique
 Units in astrophysics :: Unités de l'astrophysique; Motion in the universe :: Mouvement dans l'Univers; Stellar evolution :: Évolution des étoiles; Cosmology :: Cosmologie` },
-aqa: { en: "OxfordAQA International GCSE Physics", fr: "OxfordAQA International GCSE Physique", code: "9203", text: `
+aqa: { en: "OxfordAQA International GCSE Physics", fr: "Physique – GCSE international OxfordAQA", code: "9203", text: `
 # Forces and their effects :: Les forces et leurs effets
 Forces and their interactions :: Les forces et leurs interactions; Motion :: Mouvement; Resultant forces :: Forces résultantes; Momentum :: Quantité de mouvement; Safety in public transport :: Sécurité dans les transports; Forces and terminal velocity :: Forces et vitesse limite; Centre of mass :: Centre de masse; Moments and levers :: Moments et leviers
 # Energy :: Énergie
@@ -141,7 +141,7 @@ Life cycle of a star :: Cycle de vie d'une étoile; Solar system and orbital mot
 },
 
 chemistry: {
-cambridge: { en: "Cambridge IGCSE Chemistry", fr: "Cambridge IGCSE Chimie", code: "0620", text: `
+cambridge: { en: "Cambridge IGCSE Chemistry", fr: "Chimie – IGCSE Cambridge", code: "0620", text: `
 # 1. States of matter :: 1. États de la matière
 Solids, liquids and gases :: Solides, liquides et gaz; Diffusion :: Diffusion
 # 2. Atoms, elements and compounds :: 2. Atomes, éléments et composés
@@ -166,7 +166,7 @@ Water :: Eau; Fertilisers :: Engrais; Air quality and climate :: Qualité de l'a
 Formulae, functional groups and terminology :: Formules, groupes fonctionnels et terminologie; Naming organic compounds :: Nommer les composés organiques; Fuels :: Combustibles; Alkanes :: Alcanes; Alkenes :: Alcènes; Alcohols :: Alcools; Carboxylic acids :: Acides carboxyliques; Polymers :: Polymères
 # 12. Experimental techniques and chemical analysis :: 12. Techniques expérimentales et analyse chimique
 Experimental design :: Conception d'expériences; Acid-base titrations :: Titrages acido-basiques; Chromatography :: Chromatographie; Separation and purification :: Séparation et purification; Identification of ions and gases :: Identification des ions et des gaz` },
-edexcel: { en: "Pearson Edexcel International GCSE Chemistry", fr: "Pearson Edexcel International GCSE Chimie", code: "4CH1", text: `
+edexcel: { en: "Pearson Edexcel International GCSE Chemistry", fr: "Chimie – GCSE international Pearson Edexcel", code: "4CH1", text: `
 # 1. Principles of chemistry :: 1. Principes de la chimie
 States of matter :: États de la matière; Elements, compounds and mixtures :: Éléments, composés et mélanges; Atomic structure :: Structure atomique; The Periodic Table :: Le tableau périodique; Chemical formulae and equations :: Formules et équations chimiques; Relative masses and moles :: Masses relatives et moles; Molar volumes of gases :: Volumes molaires des gaz; Ionic bonding :: Liaison ionique; Covalent bonding :: Liaison covalente; Metallic bonding :: Liaison métallique; Electrolysis :: Électrolyse
 # 2. Inorganic chemistry :: 2. Chimie inorganique
@@ -175,7 +175,7 @@ Group 1 (alkali metals): lithium, sodium and potassium :: Groupe 1 (métaux alca
 Energetics :: Énergétique; Rates of reaction :: Vitesses de réaction; Reversible reactions and equilibria :: Réactions réversibles et équilibres
 # 4. Organic chemistry :: 4. Chimie organique
 Introduction to organic chemistry :: Introduction à la chimie organique; Crude oil :: Pétrole brut; Alkanes :: Alcanes; Alkenes :: Alcènes; Alcohols :: Alcools; Carboxylic acids :: Acides carboxyliques; Esters :: Esters; Synthetic polymers :: Polymères synthétiques` },
-aqa: { en: "OxfordAQA International GCSE Chemistry", fr: "OxfordAQA International GCSE Chimie", code: "9202", text: `
+aqa: { en: "OxfordAQA International GCSE Chemistry", fr: "Chimie – GCSE international OxfordAQA", code: "9202", text: `
 # Atomic structure and the periodic table :: Structure atomique et tableau périodique
 Solids, liquids and gases :: Solides, liquides et gaz; A simple model of the atom :: Un modèle simple de l'atome; The Periodic Table :: Le tableau périodique
 # Structure, bonding and the properties of matter :: Structure, liaisons et propriétés de la matière
@@ -199,7 +199,7 @@ Carbon compounds as fuels :: Les composés du carbone comme combustibles; Synthe
 },
 
 biology: {
-cambridge: { en: "Cambridge IGCSE Biology", fr: "Cambridge IGCSE Biologie", code: "0610", text: `
+cambridge: { en: "Cambridge IGCSE Biology", fr: "Biologie – IGCSE Cambridge", code: "0610", text: `
 # 1. Characteristics and classification of living organisms :: 1. Caractéristiques et classification du vivant
 Characteristics of living organisms :: Caractéristiques des êtres vivants; Concept and uses of classification systems :: Notion et usages des systèmes de classification; Features of organisms :: Caractères des organismes
 # 2. Organisation of the organism :: 2. Organisation de l'organisme
@@ -242,7 +242,7 @@ Energy flow :: Flux d'énergie; Food chains and food webs :: Chaînes et réseau
 Food supply :: Approvisionnement alimentaire; Habitat destruction :: Destruction des habitats; Pollution :: Pollution; Conservation :: Conservation
 # 21. Biotechnology and genetic modification :: 21. Biotechnologie et modification génétique
 Biotechnology and genetic modification :: Biotechnologie et modification génétique; Biotechnology :: Biotechnologie; Genetic modification :: Modification génétique` },
-edexcel: { en: "Pearson Edexcel International GCSE Biology", fr: "Pearson Edexcel International GCSE Biologie", code: "4BI1", text: `
+edexcel: { en: "Pearson Edexcel International GCSE Biology", fr: "Biologie – GCSE international Pearson Edexcel", code: "4BI1", text: `
 # 1. The nature and variety of living organisms :: 1. Nature et diversité des êtres vivants
 Characteristics of living organisms :: Caractéristiques des êtres vivants; Variety of living organisms :: Diversité des êtres vivants
 # 2. Structure and functions in living organisms :: 2. Structures et fonctions des êtres vivants
@@ -253,7 +253,7 @@ Reproduction in flowering plants :: Reproduction des plantes à fleurs; Reproduc
 The organism in the environment :: L'organisme dans son environnement; Feeding relationships :: Relations alimentaires; Cycles within ecosystems :: Cycles dans les écosystèmes; Human influences on the environment :: Influence de l'humain sur l'environnement
 # 5. Use of biological resources :: 5. Usage des ressources biologiques
 Food production: crop plants :: Production alimentaire : cultures; Food production: micro-organisms :: Production alimentaire : micro-organismes; Food production: fish farming :: Production alimentaire : pisciculture; Selective breeding :: Sélection artificielle; Genetic modification (genetic engineering) :: Modification génétique (génie génétique); Cloning :: Clonage` },
-aqa: { en: "OxfordAQA International GCSE Biology", fr: "OxfordAQA International GCSE Biologie", code: "9201", text: `
+aqa: { en: "OxfordAQA International GCSE Biology", fr: "Biologie – GCSE international OxfordAQA", code: "9201", text: `
 # Organisation :: Organisation
 Cell structure :: Structure de la cellule; Principles of organisation :: Principes d'organisation; Animal tissues, organs and systems :: Tissus, organes et systèmes animaux; Plant tissues, organs and systems :: Tissus, organes et systèmes végétaux; Transport in cells :: Transport dans les cellules
 # Bioenergetics :: Bioénergétique
@@ -269,7 +269,7 @@ Continuous and discontinuous variation :: Variation continue et discontinue; Nat
 },
 
 cs: {
-cambridge: { en: "Cambridge IGCSE Computer Science", fr: "Cambridge IGCSE Informatique", code: "0478", text: `
+cambridge: { en: "Cambridge IGCSE Computer Science", fr: "Informatique – IGCSE Cambridge", code: "0478", text: `
 # 1. Data representation :: 1. Représentation des données
 Number systems :: Systèmes de numération; Text, sound and images :: Texte, son et images; Data storage and compression :: Stockage et compression des données
 # 2. Data transmission :: 2. Transmission des données
@@ -290,7 +290,7 @@ Programming concepts :: Notions de programmation; Arrays :: Tableaux; File handl
 Single-table databases :: Bases de données à une table; Structured Query Language (SQL) :: Langage de requêtes SQL
 # 10. Boolean logic :: 10. Logique booléenne
 Logic gates :: Portes logiques; Logic circuits, truth tables and expressions :: Circuits logiques, tables de vérité et expressions` },
-edexcel: { en: "Pearson Edexcel International GCSE Computer Science", fr: "Pearson Edexcel International GCSE Informatique", code: "4CP0", text: `
+edexcel: { en: "Pearson Edexcel International GCSE Computer Science", fr: "Informatique – GCSE international Pearson Edexcel", code: "4CP0", text: `
 # 1. Problem solving :: 1. Résolution de problèmes
 Algorithms :: Algorithmes; Decomposition and abstraction :: Décomposition et abstraction
 # 2. Programming :: 2. Programmation
@@ -303,7 +303,7 @@ Machines and computational modelling :: Machines et modélisation informatique; 
 Networks :: Réseaux; Network security :: Sécurité des réseaux; The internet and the World Wide Web :: Internet et le Web
 # 6. The bigger picture :: 6. Vue d'ensemble
 Emerging trends, issues and impact :: Tendances émergentes, enjeux et impact` },
-aqa: { en: "OxfordAQA International GCSE Computer Science", fr: "OxfordAQA International GCSE Informatique", code: "9210", text: `
+aqa: { en: "OxfordAQA International GCSE Computer Science", fr: "Informatique – GCSE international OxfordAQA", code: "9210", text: `
 # Algorithms :: Algorithmes
 Representing algorithms :: Représenter des algorithmes; Efficiency of algorithms :: Efficacité des algorithmes; Searching algorithms :: Algorithmes de recherche; Sorting algorithms :: Algorithmes de tri
 # Programming :: Programmation
@@ -329,8 +329,8 @@ function splitNames(text) {
   const parts = text.split("::");
   return { en: parts[0].trim(), fr: (parts[1] || parts[0]).trim() };
 }
-BL.getProgramme = function (subject, board) {
-  const p = BL.programmes[subject][board];
+BL.getProgramme = function (subject, board, level) {
+  const p = level === "as" || level === "a" ? BL.advanced[subject][board][level] : BL.programmes[subject][board];
   if (p.units) return p;
   p.units = [];
   const seen = {};

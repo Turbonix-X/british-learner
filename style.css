@@ -85,17 +85,20 @@ h3 { font-size: 1rem; font-weight: 700; margin: 20px 0 10px; }
   box-shadow: 0 6px 26px rgba(10, 111, 147, 0.35);
 }
 @keyframes header-flow { to { background-position: 100% 0; } }
-.bl-header { max-width: 1240px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; gap: 22px; }
+.bl-header { max-width: 1400px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; gap: 16px; }
 .bl-title { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.5px; color: #fff; text-decoration: none; white-space: nowrap; transition: transform 0.4s var(--spring); }
 .bl-title:hover { transform: scale(1.04) rotate(-1deg); }
 .bl-title span { color: var(--aqua); }
 .subject-tabs { position: relative; display: flex; flex: 1; gap: 2px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
 .subject-tabs::-webkit-scrollbar { display: none; }
-.subject-tab { position: relative; z-index: 1; overflow: hidden; padding: 9px 14px; border-radius: 12px; color: #fff; font-weight: 700; font-size: 0.95rem; text-decoration: none; white-space: nowrap; transition: color 0.35s var(--ease), transform 0.35s var(--spring); }
+.subject-tab { position: relative; z-index: 1; overflow: hidden; padding: 9px 12px; border-radius: 12px; color: #fff; font-weight: 700; font-size: 0.95rem; text-decoration: none; white-space: nowrap; transition: color 0.35s var(--ease), transform 0.35s var(--spring); }
 .subject-tab:hover { transform: translateY(-2px); }
 .subject-tab.active { color: var(--blue-deep); }
 .st-short { display: none; }
 .tab-glider { position: absolute; left: 0; top: 0; bottom: 0; width: 0; opacity: 0; border-radius: 12px; background: #fff; box-shadow: 0 4px 18px rgba(255, 255, 255, 0.4); transition: transform 0.55s var(--spring), width 0.4s var(--ease), opacity 0.3s; }
+.future-tabs { flex: none; display: flex; gap: 2px; margin-left: auto; }
+.future-tab { padding: 9px 12px; border: none; background: none; border-radius: 12px; color: rgba(255, 255, 255, 0.5); font-weight: 700; font-size: 0.9rem; white-space: nowrap; cursor: not-allowed; filter: grayscale(1); }
+.future-tab.nope { animation: nope 0.45s var(--ease); }
 .lang-switch { position: relative; flex: none; display: flex; padding: 3px; border-radius: 999px; background: rgba(255, 255, 255, 0.18); }
 .lang-switch button { position: relative; z-index: 1; width: 38px; padding: 5px 0; border: none; background: none; border-radius: 999px; color: #fff; font-weight: 800; font-size: 0.8rem; transition: color 0.35s; }
 .lang-switch button[aria-pressed="true"] { color: var(--blue-deep); }
@@ -115,9 +118,6 @@ h3 { font-size: 1rem; font-weight: 700; margin: 20px 0 10px; }
 .pb-btn:hover { background: var(--soft); transform: translateY(-1px); }
 .pb-btn.active { background: linear-gradient(135deg, var(--green-deep), var(--blue-deep)); color: #fff; box-shadow: 0 4px 16px rgba(10, 111, 147, 0.4); }
 .pb-btn.alt.active { background: linear-gradient(135deg, var(--blue-deep), var(--green-deep)); }
-.pb-btn.locked { color: var(--muted); opacity: 0.45; cursor: not-allowed; filter: grayscale(1); }
-.pb-btn.locked:hover { background: none; transform: none; }
-.pb-btn.nope { animation: nope 0.45s var(--ease); }
 @keyframes nope { 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
 
 /* ---------- Page frame ---------- */
@@ -444,7 +444,8 @@ h3 { font-size: 1rem; font-weight: 700; margin: 20px 0 10px; }
   .bl-header { flex-wrap: wrap; gap: 8px 12px; }
   .bl-title { order: 1; flex: 1; }
   .lang-switch { order: 2; }
-  .subject-tabs { order: 3; flex: 1 0 100%; }
+  .subject-tabs { order: 3; flex: 1 1 auto; }
+  .future-tabs { order: 4; }
   .el-columns { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
@@ -460,6 +461,8 @@ h3 { font-size: 1rem; font-weight: 700; margin: 20px 0 10px; }
   .pb-btn { flex: 1; text-align: center; padding: 5px 4px; font-size: 0.82rem; }
   .st-full { display: none; }
   .st-short { display: inline; }
+  .future-tabs { width: 100%; margin-left: 0; justify-content: flex-end; }
+  .future-tab { padding: 4px 8px; font-size: 0.78rem; }
   .subject-tab { padding: 7px 10px; font-size: 0.86rem; }
   .subject-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .subject-card:last-child { grid-column: 1 / -1; }
